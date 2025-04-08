@@ -49,9 +49,44 @@ Open your terminal and run belowed commands
 
 You can run the Spring Boot application with a specific profile. For example, to run with the test or prod profile: There are only difference for logging level
 
-mvn spring-boot:run -Dspring-boot.run.profiles=test
+    mvn spring-boot:run -Dspring-boot.run.profiles=test
 
 
 ## important
 
-The api will start 8090 port s
+The api will start 8090 port.
+
+### Initialize data
+
+When application start there are customer and wallet data so there is a public URL for generation sampler data feel free to use this service. 
+ when you call this service it will delete all customer , wallet and transactions and it will create 3 Employee , 3 Customer and wallets for them.
+ 
+ GET http://localhost:8090/api/public/initialize
+ 
+ response :
+ ...
+     {
+        "id": "id",
+        "name": "EMPLOYEE 3",
+        "surname": "HnmhN",
+        "tckn": "0359800151",
+        "role": "EMPLOYEE"
+    },
+    {
+        "id": "id",
+        "name": "CUSTOMER 1",
+        "surname": "HIJUV",
+        "tckn": "4508186723",
+        "role": "CUSTOMER"
+    },
+ ....
+### Authenticaiton
+
+All end-points are secured instead of /api/public/** so you need to add header that name is "authentication-token" and value is custemer Id . You can find custermer id in Initialize service
+
+
+### Open API
+You can find more details for requesting service below link.
+
+http://localhost:8090/api/public/swagger-ui/index.html	
+
