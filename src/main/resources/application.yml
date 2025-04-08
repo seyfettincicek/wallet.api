@@ -1,0 +1,23 @@
+server:
+  port: 8090
+
+
+springdoc:
+  api-docs:
+    path: /api/public/api-docs
+  swagger-ui:
+    path: /api/public/swagger-ui/index.html	
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:walletDb
+    username: sa
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: create
+      show_sql: true
+      format_sql: true
+  h2:
+    console:
+      enabled: false	

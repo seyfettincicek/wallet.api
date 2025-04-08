@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true" scan="true">
+
+  <property name="LOG_PATH" value="/var/log"/>
+  <property name="APPLICATION_NAME" value="wallet-api"/>
+
+  <appender class="ch.qos.logback.core.ConsoleAppender" name="STDOUT">
+    <target>System.out</target>
+    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+      <level>DEBUG</level>
+    </filter>
+    <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+      <pattern>[%X{X-Request-Id}] - %d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36}.%M\(%line\) - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <appender class="ch.qos.logback.core.rolling.RollingFileAppender" name="FILE">
+    <file>${LOG_PATH}/${APPLICATION_NAME}.log</file>
+    <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+      <pattern>[%X{X-Request-Id}] - %d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36}.%M\(%line\) - %msg%n</pattern>
+    </encoder>
+    <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+      <fileNamePattern>${LOG_PATH}/archived/${APPLICATION_NAME}.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+      <maxHistory>7</maxHistory>
+      <maxFileSize>100MB</maxFileSize>
+      <totalSizeCap>1GB</totalSizeCap>
+    </rollingPolicy>
+  </appender>
+
+<logger level="DEBUG" name="ing.hub.wallet"/>
+  <logger level="OFF" name="ch.qos"/>
+  <logger level="INFO" name="org.springframework"/>
+  <logger level="INFO" name="org.hibernate.SQL" />
+  <logger level="DEBUG" name="org.hibernate.type.descriptor.sql"/>
+  
+
+  <root level="INFO">
+    <appender-ref ref="STDOUT"/>
+    <appender-ref ref="FILE"/>
+  </root>
+
+</configuration>
